@@ -1,15 +1,13 @@
 import streamlit as st
 import requests
 
-st.title("Test API Football Fixtures - Sezon automat")
+st.title("Test API Football Fixtures - Fără dată")
 
 API_KEY = st.secrets["API_FOOTBALL_KEY"]
 HEADERS = {"x-apisports-key": API_KEY}
 API_BASE = "https://v3.football.api-sports.io"
 
-league_id = 39  # Premier League, poți schimba după nevoie
-date = "2024-10-01"  # data fixă pentru test, schimbă după cum vrei
-
+league_id = 39  # Premier League
 seasons_to_try = [2024, 2025]
 
 fixtures = None
@@ -19,7 +17,7 @@ for season in seasons_to_try:
     params = {
         "league": league_id,
         "season": season,
-        "date": date,
+        # fără 'date' ca să aducem toate meciurile din sezon
     }
     response = requests.get(f"{API_BASE}/fixtures", headers=HEADERS, params=params)
     data = response.json()
